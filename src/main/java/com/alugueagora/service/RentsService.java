@@ -1,6 +1,6 @@
 package com.alugueagora.service;
 
-import com.rentNow.model.Rents;
+import com.rentNow.model.RentsModel;
 import com.alugueagora.repository.RentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,19 +15,19 @@ public class RentsService {
     @Autowired
     private RentsRepository rentsRepository;
 
-    public List<Rents> findAll() {
+    public List<RentsModel> findAll() {
         return rentsRepository.findAll();
     }
 
-    public Optional<Rents> findById(UUID id) {
+    public Optional<RentsModel> findById(UUID id) {
         return rentsRepository.findById(id);
     }
 
-    public Rents save(RentsService rents) {
+    public RentsModel save(RentsModel rents) {
         return rentsRepository.save(rents);
     }
 
-    public void deleteById(UUID id) {
+    public void delete(UUID id) {
         rentsRepository.deleteById(id);
     }
 }

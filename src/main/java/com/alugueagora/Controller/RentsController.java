@@ -1,7 +1,7 @@
 package com.alugueagora.Controller;
 
 import com.alugueagora.dtos.RentsDtos;
-import com.rentNow.model.Rents;
+import com.rentNow.model.RentsModel;
 import com.alugueagora.service.RentsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,28 +22,51 @@ public class RentsController {
     private RentsService rentsService;
 
     @PostMapping
-    public ResponseEntity<Rents>saveRents(@RequestBody @Valid RentsDtos rentsDtos) {
-        var rents = new RentsService();
+    public ResponseEntity<RentsModel>saveRents(@RequestBody @Valid RentsDtos rentsDtos) {
+        var rents = new RentsModel();
         BeanUtils.copyProperties(rentsDtos, rents);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(rentsService.save(rents));
     }
 
     @GetMapping
-    public ResponseEntity<List<Rents>> getAllRents() {
+    public ResponseEntity<List<RentsModel>> getAllRents() {
         return ResponseEntity.status(HttpStatus.OK).body(rentsService.findAll());
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Rents> getRentById(@PathVariable (value = "id")UUID id) {
-        Optional<Rents> rent = rentsService.findById(id);
-        return rent.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Object> getRentById(@PathVariable (value = "id")UUID id) {
+        Optional<RentsModel> rent = rentsService.findById(id);
+        if (rent.isEmpty()) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Rents not found");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(rent.get());
+
+    }
+
+    @PutMapping("rents/{id}")
+    public ResponseEntity<Object> updateRents(@PathVariable (value = "id")UUID id , @RequestBody @Valid RentsDtos rentsDtos) {
+        Optional<RentsModel > rent = rentsService.findById(id);
+        if (rent.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Rents not found");
+        }
+        var rentsModel = rent.get();
+        BeanUtils.copyProperties(rentsDtos, rentsModel);
+        return ResponseEntity.status(HttpStatus.OK).body(rentsService.save(rentsModel));
+
     }
 
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRent(@PathVariable UUID id) {
-        rentsService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("rents/{id}")
+    public ResponseEntity<Object> deleteRent(@PathVariable UUID id) {
+        Optional<RentsModel > rent = rentsService.findById(id);
+        if (rent.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Rents not found");
+
+        }
+        rentsService.delete(rent.get().getId());
+        return ResponseEntity.status(HttpStatus.OK).body("Rents deleted successfully");
+
     }
 }
