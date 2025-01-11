@@ -31,12 +31,12 @@ public class RentsImageController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RentsImageModel>> getAllRents() {
+    public ResponseEntity<List<RentsImageModel>> getAllRentsImage() {
         return ResponseEntity.status(HttpStatus.OK).body(rentsImageService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getRentById(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getRentImageById(@PathVariable(value = "id") UUID id) {
         Optional<RentsImageModel> rent = rentsImageService.findById(id);
         if (rent.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Rents not found");
@@ -46,7 +46,7 @@ public class RentsImageController {
     }
 
     @PutMapping("rentsImage/{id}")
-    public ResponseEntity<Object> updateRents(@PathVariable (value = "id")UUID id , @RequestBody @Valid RentsImageDtos rentsImageDtos) {
+    public ResponseEntity<Object> updateRentsImage(@PathVariable (value = "id")UUID id , @RequestBody @Valid RentsImageDtos rentsImageDtos) {
         Optional<RentsImageModel > rent = rentsImageService.findById(id);
         if (rent.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Rents not found");

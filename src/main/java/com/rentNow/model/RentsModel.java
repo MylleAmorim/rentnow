@@ -7,7 +7,7 @@ import java.security.Timestamp;
 import java.util.UUID;
 
 @Entity
-@Table(name = "rents")
+@Table(name = "rents",schema = "public")
 public class RentsModel {
     @Id
     @GeneratedValue
