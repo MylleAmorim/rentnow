@@ -22,6 +22,7 @@ public class RentsService {
     private RentsRepository rentsRepository;
 
     public List<RentsModel> findAll() {
+
         return rentsRepository.findAll();
     }
 
