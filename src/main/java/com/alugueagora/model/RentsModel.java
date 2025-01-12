@@ -1,4 +1,4 @@
-package com.rentNow.model;
+package com.alugueagora.model;
 
 
 import jakarta.persistence.*;

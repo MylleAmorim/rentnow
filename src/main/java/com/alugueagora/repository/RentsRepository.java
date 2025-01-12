@@ -1,6 +1,6 @@
 package com.alugueagora.repository;
 
-import com.rentNow.model.RentsModel;
+import com.alugueagora.model.RentsModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

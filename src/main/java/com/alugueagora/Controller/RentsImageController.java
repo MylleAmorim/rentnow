@@ -1,10 +1,8 @@
 package com.alugueagora.Controller;
 
-import com.alugueagora.dtos.RentsDtos;
 import com.alugueagora.dtos.RentsImageDtos;
 import com.alugueagora.service.RentsImageService;
-import com.rentNow.model.RentsImageModel;
-import com.rentNow.model.RentsModel;
+import com.alugueagora.model.RentsImageModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

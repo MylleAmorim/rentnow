@@ -1,7 +1,7 @@
 package com.alugueagora.Controller;
 
 import com.alugueagora.dtos.RentsDtos;
-import com.rentNow.model.RentsModel;
+import com.alugueagora.model.RentsModel;
 import com.alugueagora.service.RentsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
